@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+
+  client:
+    build:
+      context: ../client
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    
+  api:
+    build:
+      context: ../api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=localhost
+      - DB_PORT=3306
+      - DB_DATABASE=golang
+      - DB_USER=root
+      - DB_PASSWORD=pass
+      - SECRET=0f1j0ewfje0fdsfi
+    network_mode: "host"
